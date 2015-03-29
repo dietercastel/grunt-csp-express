@@ -25,8 +25,8 @@ module.exports = function(grunt) {
 		//Can be overridden by gruntfile
 		var options = this.options({
 			filename: "/csp.json",
-			excludeDirs: ["*bin*","*node_modules*","*.git*"],
-			excludeFiles: ["*.log"]
+			excludeDirs: ["bin","node_modules",".git"],
+			excludeFiles: ["Gruntfile.js,package.json,*.log,*.git*"]
 		});
 		grunt.log.write("Running makecsp with:\n" + JSON.stringify(options, null,4));
 		//Options as used by content-security-policy

@@ -2,10 +2,10 @@
   "name": "grunt-csp-express",
   "description": "Tool to extract urls of a project for use in the Content-Security-Policy.",
   "version": "0.1.0",
-  "homepage": "https://github.com/vagrant/grunt-init",
+  "homepage": "https://github.com/dietercastel/grunt-csp-express/",
   "author": {
     "name": "Dieter Castel",
-    "url": "dietercastel.com"
+    "url": "http://dietercastel.com"
   },
   "repository": {
     "type": "git",
