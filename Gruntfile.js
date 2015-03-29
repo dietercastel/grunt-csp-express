@@ -43,9 +43,7 @@ module.exports = function(grunt) {
       },
       custom_options: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!',
-            expressDir: '/vagrant/sae-server'
+			expressDir: '/vagrant/sae-server'
         },
         files: {
           'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']

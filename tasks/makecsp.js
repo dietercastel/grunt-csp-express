@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 		var options = this.options({
 			filename: "/csp.json",
 			excludeDirs: ["bin","node_modules",".git"],
-			excludeFiles: ["Gruntfile.js,package.json,*.log,*.git*"]
+			excludeFiles: ["csp.json,Gruntfile.js,package.json,.gitignore"]
 		});
 		grunt.log.write("Running makecsp with:\n" + JSON.stringify(options, null,4));
 		//Options as used by content-security-policy
@@ -44,17 +44,22 @@ module.exports = function(grunt) {
 		options["excludeDirs"].forEach(function(ex){
 			exDirRes += '--exclude-dir="'+ ex + '" ';
 		});
-		var exFilesRes = "";
-		options["excludeFiles"].forEach(function(ex){
-			exFilesRes += '--exclude-dir="'+ ex + '" ';
-		});
+
+		//But for normal files the alternative doesn't work
+		// var exFilesRes = "";
+		// options["excludeFiles"].forEach(function(ex){
+		// 	exFilesRes += '--exclude="'+ ex + '" ';
+		// });
 		
+		// This worked for normal files
 		// var basecommand ='grep -Er --exclude-dir={'+ 
 		// options['excludeDirs'].toString() + 
 		// '} --exclude={'+
 		// options['excludeFiles'].toString()+
 		// '}';
-		basecommand += exDirRes + exFilesRes;
+
+		//Handeling the wildcard is pretty hard apperantly...
+		basecommand += exDirRes + '--exclude="*.log" ' + '--exclude={'+ options['excludeFiles'].toString()+ '}';
 
 		grunt.log.writeln(basecommand);
 
