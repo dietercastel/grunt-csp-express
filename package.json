@@ -1,0 +1,46 @@
+{
+  "name": "grunt-csp-express",
+  "description": "Tool to extract urls of a project for use in the Content-Security-Policy.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/vagrant/grunt-init",
+  "author": {
+    "name": "Dieter Castel",
+    "url": "dietercastel.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vagrant/grunt-init.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vagrant/grunt-init/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/vagrant/grunt-init/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5",
+    "execSync": "^1.0.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "grunt",
+    "csp",
+    "content-security-policy",
+	"express"
+  ]
+}
