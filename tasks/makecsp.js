@@ -44,6 +44,17 @@ module.exports = function(grunt) {
 		// var otheroptions = ["report-uri", "sandbox", "default-src"];
 
 		var srcs = ["script-src", "object-src", "style-src", "img-src", "media-src", "frame-src", "font-src", "connect-src" ];
+		//For each tag an optional extra regex.
+		var extraRegexs = {
+				"script-src":"",
+				"object-src":"",
+				"style-src":"<link rel=",
+				"img-src":"",
+				"media-src":"",
+				"frame-src":"",
+				"font-src":"",
+				"connect-src": ""
+		};
 
 		var basecommand ='grep -Er ';
 
@@ -78,7 +89,11 @@ module.exports = function(grunt) {
 		grunt.log.writeln("basecommand: " + basecommand);
 		srcs.forEach(function(src) {
 			var tag = src.substring(0,src.length-4);
-			var tagregex = ' "<'+tag+' (ng-)?src=" ';
+			var extraRegex= "";
+			if(extraRegexs[src] !== ""){
+				extraRegex = "|"+extraRegexs[src];
+			}
+			var tagregex = ' "<'+tag+' (ng-)?src='+extraRegex+'" ';
 			grunt.log.writeln("tag: " + tag);
 			grunt.log.writeln("tagregex" + tagregex);
 			var runCommand = basecommand + tagregex + options["expressDir"];
