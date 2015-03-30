@@ -1,6 +1,6 @@
 /*
  * grunt-csp-express
- * https://github.com/vagrant/grunt-init
+ * https://github.com/dietercastel/grunt-csp-express
  *
  * Copyright (c) 2015 Dieter Castel
  * Licensed under the MIT license.
@@ -20,7 +20,6 @@ module.exports = function(grunt) {
 	}
 
 	grunt.registerMultiTask('makecsp', description, function() {
-		grunt.log.writeln(["First line", "second line", "starting task now"]);
 		//This are the prototypical options
 		//Can be overridden by gruntfile
 		var options = this.options({
@@ -28,6 +27,15 @@ module.exports = function(grunt) {
 			excludeDirs: ["bin","node_modules",".git"],
 			excludeFiles: ["csp.json,Gruntfile.js,package.json,.gitignore"]
 		});
+		
+		//Check whether a proper path is set.
+		if(options["expressDir"] === undefined){
+			//Might include actual fs.exists here.
+			var errorString ="Set the expressDir option in your Gruntfile.js to a valid path."; 
+			grunt.log.error(errorString);
+			grunt.fail.fatal(errorString);
+			return;
+		}
 		grunt.log.write("Running makecsp with:\n" + JSON.stringify(options, null,4));
 		//Options as used by content-security-policy
 		var policy = {};
@@ -48,7 +56,7 @@ module.exports = function(grunt) {
 		//But for normal files the alternative doesn't work
 		// var exFilesRes = "";
 		// options["excludeFiles"].forEach(function(ex){
-		// 	exFilesRes += '--exclude="'+ ex + '" ';
+		// exFilesRes += '--exclude="'+ ex + '" ';
 		// });
 		
 		// This worked for normal files
@@ -112,7 +120,9 @@ module.exports = function(grunt) {
 				allURLs = matchedHTTP;
 			}else{
 				if(matchedHTTP === undefined){
-					grunt.log.err("no urls founde");
+					var errorString = "no urls found";
+					grunt.log.error(errorString);
+					grunt.fail.warn(errorString);
 				} else {
 					allURLs = matchedHTTPS.concat(matchedHTTP);
 				}

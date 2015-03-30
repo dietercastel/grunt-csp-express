@@ -27,9 +27,17 @@ grunt.initConfig({
   makecsp: {
     options: {
       // Task-specific options go here.
+	  // expressDir is required for makekcsp
+	  expressDir: "."
     },
+	//Overrides options previously specified
+	//But at least one target is needed!!
     your_target: {
       // Target-specific file lists and/or options go here.
+		options: {
+		  // Target-specific options go here.
+		  expressDir: "/path/to/my/target"
+		},
     },
   },
 });
@@ -37,53 +45,56 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.expressDir
 Type: `String`
-Default value: `',  '`
+Default value: `undefined`
 
-A string value that is used to do something with whatever.
+Setting this option is required!!
+It specifies in what directory grunt (and grep) will look for urls.
+It's also used as path where the resulting csp.json file will be stored.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+Below is an example Gruntfile.js if you just want to use makecsp in the current project directory.
+Using this as your entire grunt file when following the getting started guide mentioned above should work.
+If grunt and it's depedencies are installed just run `grunt` in your project directory.
 
 ```js
-grunt.initConfig({
-  makecsp: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
+module.exports = function(grunt) {
+  // Project configuration.
+  grunt.initConfig({
+    makecsp: {
+	  default_options: { //target with default_options
+		  options: {
+			  expressDir: "/vagrant/sae-server"
+		  }
+	  }
+	}
+  });
+
+  // This plugin provides the necessary task.
+  grunt.loadNpmTasks('grunt-csp-express');
+
+  // By default, just run makecsp 
+  grunt.registerTask('default', ['makecsp']);
+};
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  makecsp: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+You can specify custom options in the options object of the task or each target.
+The target options override the task options.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+### v0.1.1
+Fixed bug related to wildcards for files/directories.
+Updated documentation to include some example.
+Fixed wrong meta-information.
+
+### v0.1
+Initial release with very basic functionality.

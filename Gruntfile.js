@@ -30,20 +30,11 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     makecsp: {
-      default_options: {
+      options: {
+      expressDir: "/vagrant/sae-server"
+    },
+      sae: {
         options: {
-            filename: "/csp.json",
-            excludeDirs: ["bin","node_modules",".git"],
-            excludeFiles: ["*.log"],
-            expressDir: "."
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-			expressDir: '/vagrant/sae-server'
         },
         files: {
           'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
@@ -70,6 +61,7 @@ module.exports = function(grunt) {
   // plugin's task(s), then test the result.
   grunt.registerTask('test', ['clean', 'makecsp', 'nodeunit']);
 
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  // By default, lint and run makecsp as test.
+  // Add real tests here in the future
+  grunt.registerTask('default', ['jshint', 'makecsp']);
 };
