@@ -25,19 +25,22 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp']
+      tests: ['tmp','csp.json']
     },
 
     // Configuration to be run (and then tested).
     makecsp: {
-      options: {
-      expressDir: "/vagrant/sae-server"
-    },
+	  default_options : {
+	  },
+      doubles: {
+        options: {
+			filename: "/../../../tmp/doubles.json",
+			expressDir: "test/fixtures/doubles"
+        }
+      },
       sae: {
         options: {
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+			expressDir: "/vagrant/sae-server"
         }
       }
     },
@@ -59,9 +62,9 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'makecsp', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'nodeunit']);
 
   // By default, lint and run makecsp as test.
   // Add real tests here in the future
-  grunt.registerTask('default', ['jshint', 'makecsp']);
+  grunt.registerTask('default', ['clean', 'jshint', 'nodeunit']);
 };

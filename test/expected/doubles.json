@@ -1,8 +1,12 @@
 {
-    "script-src": [],
+    "script-src": [
+        "https://isup.me"
+    ],
     "object-src": [],
     "style-src": [],
-    "img-src": [],
+    "img-src": [
+        "http://isup.me"
+    ],
     "media-src": [],
     "frame-src": [],
     "font-src": [],

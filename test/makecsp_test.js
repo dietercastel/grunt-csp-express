@@ -1,6 +1,11 @@
 'use strict';
 
 var grunt = require('grunt');
+var	path = require('path');
+var exec = require('child_process').exec;
+var execOptions = {
+	cwd: path.join(__dirname, '..')
+};
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -24,25 +29,33 @@ var grunt = require('grunt');
 
 exports.makecsp = {
   setUp: function(done) {
-    // setup here if necessary
     done();
   },
   default_options: function(test) {
     test.expect(1);
-
-    var actual = grunt.file.read('tmp/default_options');
     var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
-
-    test.done();
+	exec('grunt makecsp:default_options', execOptions, function(error, stdout){
+		var actual = grunt.file.read('csp.json');
+		test.equal(actual, expected, 'Should create a file called csp.json without any urls in it.');
+		test.done();
+	});
   },
-  custom_options: function(test) {
+  doubles: function(test){
     test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
+    var expected = grunt.file.read('test/expected/doubles.json');
+	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
+		var actual = grunt.file.read('tmp/doubles.json');
+		test.equal(actual, expected, 'Should create the correct tmp/doubles.json file without doubles.');
+		test.done();
+	});
   },
+  sae: function(test){
+    test.expect(1);
+    var expected = grunt.file.read('test/expected/sae_csp.json');
+	exec('grunt makecsp:sae', execOptions, function(error, stdout){
+		var actual = grunt.file.read('/vagrant/sae-server/csp.json');
+		test.equal(actual, expected, 'Should create the correct csp.json file in /vagrant/sae-server/csp.json.');
+		test.done();
+	});
+  }
 };
