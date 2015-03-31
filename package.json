@@ -41,6 +41,8 @@
     "grunt",
     "csp",
     "content-security-policy",
-	"express"
+	"express",
+	"angular",
+	"angular.js"
   ]
 }

@@ -2,6 +2,14 @@
 
 > Tool to extract urls of a project for use in the Content-Security-Policy.
 
+##Features
+
+- Exclude directories
+- Exclude files
+- Angular.js support (tested with v1.3)
+- Designed to work with [content-security-policy](https://github.com/samuelerdtman/content-security-policy)
+- Enabled by Grunt.
+
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
@@ -141,3 +149,21 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v0.1
 - Initial release with very basic functionality.
+
+
+## Planned features
+
+- Add support for `default-src`
+	- add regex: `<link rel="import"`
+	- add regex: `<span class="ng-include:`
+- Add warnings for in-line scripts
+
+This is currently very much a work-in-progress.
+I'd like to get rid of the `grep` usage and vastly improve performance by using faster node.js features.
+I'm still quite unexperienced with node.js development so i obviously still have a lot to learn. 
+
+## Similar Projects
+
+I recently found [contentsecure](https://github.com/Munter/contentsecure) which has a very similar goal.
+I was not aware of this when creating this initial release.
+I will look further into this and see whether it's beneficial to integrate/merge/improve both projects.

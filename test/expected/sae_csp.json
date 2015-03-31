@@ -1,8 +1,7 @@
 {
     "script-src": [
         "https://ajax.googleapis.com/",
-        "https://maxcdn.bootstrapcdn.com/",
-        "https://isup.me"
+        "https://maxcdn.bootstrapcdn.com/"
     ],
     "object-src": [],
     "style-src": [
