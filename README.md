@@ -4,11 +4,14 @@
 
 ##Features
 
+- Enabled by [Grunt](http://gruntjs.com/).
 - Exclude directories
 - Exclude files
+- Option to add extra regex 
 - Angular.js support (tested with v1.3)
 - Designed to work with [content-security-policy](https://github.com/samuelerdtman/content-security-policy)
-- Enabled by Grunt.
+- url usage "guessing" (add to img-src for img tags etc.)
+- urls found in `<link rel="...">` are added to default-src (because it can be used for anything).
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -153,9 +156,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Planned features
 
-- Add support for `default-src`
-	- add regex: `<link rel="import"`
-	- add regex: `<span class="ng-include:`
+- add regex: `<span class="ng-include:` (fetched under connect-src policy)
 - Add warnings for in-line scripts
 
 This is currently very much a work-in-progress.

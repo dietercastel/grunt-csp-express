@@ -1,4 +1,5 @@
 {
+    "default-src": [],
     "script-src": [],
     "object-src": [],
     "style-src": [],
