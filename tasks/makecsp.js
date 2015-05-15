@@ -46,15 +46,15 @@ module.exports = function(grunt) {
 			excludeFiles: ["csp.json,Gruntfile.js,package.json,.gitignore"],
 			expressDir: ".",
 			extraRegexs: { //For each tag an optional extra regex.
-				"default-src":"",
+				"default-src":"url\\\(",
 				"script-src":"",
 				"object-src":"",
-				"style-src":"",
+				"style-src":"<link rel=.stylesheet",
 				"img-src":"",
 				"media-src":"",
-				"frame-src":"",
+				"frame-src":"<iframe (ng-)?src=",
 				"font-src":"",
-				"connect-src": ""
+				"connect-src": "url:" // add $resource ?
 				} 
 		});
 
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 				var tag = src.substring(0,src.length-4);
 				var baseTagRegex ='<'+tag+' (ng-)?src=';
 				if(src === "default-src"){
-					baseTagRegex ='<link rel';
+					baseTagRegex ='<link rel=.import';
 				}
 				//Process extra regexs
 				var extraRegex= "";
@@ -124,6 +124,10 @@ module.exports = function(grunt) {
 
 				//Proccess each found line looking for urls.
 				var addSelf = false;
+				if(src==="connect-src"){
+					//Loading angular templates from self!!
+					addSelf = true;	
+				}
 				var matchedHTTP = [];
 				var matchedHTTPS = []; 
 				grunt.verbose.writeln('Checking:\n'+ runCommand);
@@ -174,7 +178,9 @@ module.exports = function(grunt) {
 					allURLs = ["'self'"].concat(allURLs);
 				}
 				grunt.verbose.writeln("allURLs (non-uniqued)" + allURLs);
-				policy[src] = allURLs.filter(onlyUnique);
+				if(allURLs.length !== 0){
+					policy[src] = allURLs.filter(onlyUnique);
+				}
 				grunt.verbose.write("Policy so far: " + util.inspect(policy));
 				grunt.verbose.writeln("Matched HTTPS: "+ matchedHTTP);
 				grunt.verbose.writeln("#WARNING# Matched HTTP (UNSECURE CONNECTION): "+ matchedHTTP);

@@ -42,6 +42,16 @@ module.exports = function(grunt) {
         options: {
 			expressDir: "/vagrant/sae-server"
         }
+      },
+      rec: {
+        options: {
+			expressDir: "/vagrant/AngularRecess"
+        }
+      },
+      asc: {
+        options: {
+			expressDir: "/vagrant/angular-socketio-chat"
+        }
       }
     },
 
