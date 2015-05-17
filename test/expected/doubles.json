@@ -1,15 +1,12 @@
 {
-    "default-src": [],
+    "default-src": "'none'",
     "script-src": [
         "https://isup.me"
     ],
-    "object-src": [],
-    "style-src": [],
     "img-src": [
         "http://isup.me"
     ],
-    "media-src": [],
-    "frame-src": [],
-    "font-src": [],
-    "connect-src": []
+    "connect-src": [
+        "'self'"
+    ]
 }
