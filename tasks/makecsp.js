@@ -188,7 +188,7 @@ module.exports = function(grunt) {
 			grunt.verbose.writeln("____________________________________________________________________");
 			if(matchedHTTP.length !== 0){
 				grunt.log.writeln("WARNING: Matched HTTP (UNSECURE CONNECTION): "['red']);
-				grunt.log.writeln(matchedHTTP['red']);
+				grunt.log.writeln(matchedHTTP);
 			}
 			grunt.log.writeln("matchedHTTPS:" + matchedHTTPS);
 			var allURLs;

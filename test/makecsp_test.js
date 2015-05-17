@@ -41,11 +41,43 @@ exports.makecsp = {
 	});
   },
   doubles: function(test){
-    test.expect(1);
+    test.expect(5);
     var expected = grunt.file.read('test/expected/doubles.json');
+	var expectedNbOfWarnings = 3;
+	var nbOfWarnings = 0;
+	var scriptWarns= 0;
+	var styleWarns= 0;
+	var isupWarn = false;
+	var doublesPath = "test/fixtures/doubles/doubles.html:";
+	var scriptLN = [11,14,17];
+	var styleLN = [20,23,26];
 	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
 		var actual = grunt.file.read('tmp/doubles.json');
 		test.equal(actual, expected, 'Should create the correct tmp/doubles.json file without doubles.');
+		stdout.split(/\r?\n/).forEach(function(line){
+			if(line.indexOf("WARNING:") > -1){
+				nbOfWarnings++;			
+			};
+			if(line.indexOf("http://isup.me,http://isup.me,http://isup.me") > -1){
+				isupWarn = true;
+			}
+			scriptLN.forEach(function(ln){
+				if(line.indexOf(doublesPath+ln) > -1){
+					scriptWarns++;	
+				}
+			});
+			styleLN.forEach(function(ln){
+				if(line.indexOf(doublesPath+ln) > -1){
+					styleWarns++;	
+				}
+			});
+		});
+		test.equal(nbOfWarnings, expectedNbOfWarnings, 'There should be '+expectedNbOfWarnings+' occurences of "WARNING:" ');
+
+		test.ok(isupWarn, "There should be a warning for http usage of isup.me");
+		test.equal(scriptWarns, scriptLN.length, 'There should be ' + scriptLN.length +' script warnings for lines: ' + scriptLN);
+		test.equal(styleWarns, styleLN.length, 'There should be ' + styleLN.length +' style warnings for lines: ' + styleLN);
+
 		test.done();
 	});
   },
