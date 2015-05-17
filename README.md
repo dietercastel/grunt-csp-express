@@ -11,7 +11,7 @@
 - Angular.js support (tested with v1.3)
 - Designed to work with [content-security-policy](https://github.com/samuelerdtman/content-security-policy)
 - url usage "guessing" (add to img-src for img tags etc.)
-- urls found in `<link rel="...">` are added to default-src (because it can be used for anything).
+- Warnings for: inline script, style and html import usage.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -138,6 +138,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+### v0.1.3
+- Introduced warnings for: inline script, style and html import usage.
+- Made default-src default to 'none' to be as restrictive as possible.
+- Made connect-src default to 'self' because angular needs it for templates.
+- Updated tests accordingly.
+- Updated logs accordingly with colored warnings!
+
 ### v0.1.2
 - Code and log cleanup.
 - Support for --verbose run with Grunt
@@ -156,12 +163,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Planned features
 
-- add regex: `<span class="ng-include:` (fetched under connect-src policy)
-- Add warnings for in-line scripts
-
 This is currently very much a work-in-progress.
 I'd like to get rid of the `grep` usage and vastly improve performance by using faster node.js features.
-I'm still quite unexperienced with node.js development so i obviously still have a lot to learn. 
+I'm still quite unexperienced with node.js development so I obviously still have a lot to learn. 
 
 ## Similar Projects
 
