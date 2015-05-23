@@ -49,16 +49,17 @@ var htmlimport = {
 	"message" : "You are using html import(s) which could lead to a CSP circumvention in chrome!",
 	"extraflag" : ""
 };
-var htmlimport = {
-	"regex" : "coffeekup|ejs|hamljs|jade|jqtpl|swig|templ8|whiskers|mu2|dustjs-linkedin|nunjucks|ect|jshtml|hogan|handlebars",
+var templatewarn= {
+	"regex" : "app.set\\\(.view engine|app.render\\\(|res.render\\\(",
 	"message" : "Using both AngularJS and a serverside templating engine is discouraged as it can lead to unexpected XSS vulnerabilities!",
-	"extraflag" : " -i"
+	"extraflag" : ""
 };
 
 var warnings =  [
 	inlinescript,
 	inlinestyle,
-	htmlimport
+	htmlimport,
+	templatewarn
 ];
 
 function onlyUnique(value, index, self) { 

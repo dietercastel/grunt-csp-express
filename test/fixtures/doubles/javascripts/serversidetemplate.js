@@ -1,5 +1,5 @@
 //Should give warnings
-var one = require('ect');
-var two = require('ejs');
-var three = require('nunjucks');
-var four = require('hogan-express');
+app.set('view engine','ect');
+app.set("view engine",'ejs');
+app.render('nunjucks',something);
+res.render('hogan-express', somemore);
