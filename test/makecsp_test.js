@@ -41,16 +41,19 @@ exports.makecsp = {
 	});
   },
   doubles: function(test){
-    test.expect(5);
+    test.expect(6);
     var expected = grunt.file.read('test/expected/doubles.json');
-	var expectedNbOfWarnings = 3;
+	var expectedNbOfWarnings = 4;
 	var nbOfWarnings = 0;
 	var scriptWarns= 0;
 	var styleWarns= 0;
 	var isupWarn = false;
+	var templateWarn = 0;
 	var doublesPath = "test/fixtures/doubles/doubles.html:";
+	var templPath = "test/fixtures/doubles/javascripts/serversidetemplate.js:";
 	var scriptLN = [11,14,17];
 	var styleLN = [20,23,26];
+	var templLN = [2,3,4,5];
 	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
 		var actual = grunt.file.read('tmp/doubles.json');
 		test.equal(actual, expected, 'Should create the correct tmp/doubles.json file without doubles.');
@@ -71,12 +74,18 @@ exports.makecsp = {
 					styleWarns++;	
 				}
 			});
+			templLN.forEach(function(ln){
+				if(line.indexOf(templPath+ln) > -1){
+					templateWarn++;	
+				}
+			});
 		});
 		test.equal(nbOfWarnings, expectedNbOfWarnings, 'There should be '+expectedNbOfWarnings+' occurences of "WARNING:" ');
 
 		test.ok(isupWarn, "There should be a warning for http usage of isup.me");
 		test.equal(scriptWarns, scriptLN.length, 'There should be ' + scriptLN.length +' script warnings for lines: ' + scriptLN);
 		test.equal(styleWarns, styleLN.length, 'There should be ' + styleLN.length +' style warnings for lines: ' + styleLN);
+		test.equal(templateWarn, templLN.length, 'There should be ' + templLN.length +' server-side template engine warnings for lines: ' + templLN);
 
 		test.done();
 	});

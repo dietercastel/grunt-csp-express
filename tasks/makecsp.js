@@ -49,6 +49,11 @@ var htmlimport = {
 	"message" : "You are using html import(s) which could lead to a CSP circumvention in chrome!",
 	"extraflag" : ""
 };
+var htmlimport = {
+	"regex" : "coffeekup|ejs|hamljs|jade|jqtpl|swig|templ8|whiskers|mu2|dustjs-linkedin|nunjucks|ect|jshtml|hogan|handlebars",
+	"message" : "Using both AngularJS and a serverside templating engine is discouraged as it can lead to unexpected XSS vulnerabilities!",
+	"extraflag" : " -i"
+};
 
 var warnings =  [
 	inlinescript,
@@ -226,6 +231,7 @@ module.exports = function(grunt) {
 		// // Close double quote plus space
 		// var endRegexArg ='" '; 
 		
+		//TODO: warning for server-side templates??
 		warnings.forEach(function(warning){
 			var runCommand = basecommand + startRegexArg + warning["regex"] + endRegexArg + options["expressDir"] + warning.extraflag;
 			var returnObject = sh.exec(runCommand);

@@ -52,6 +52,11 @@ module.exports = function(grunt) {
         options: {
 			expressDir: "/vagrant/angular-socketio-chat"
         }
+      },
+      gts: {
+        options: {
+			expressDir: "/vagrant/gts-inventory"
+        }
       }
     },
 
