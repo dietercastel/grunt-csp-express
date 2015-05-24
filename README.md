@@ -2,16 +2,16 @@
 
 > Tool to extract urls of a project for use in the Content-Security-Policy.
 
-##Features
+## Features
 
 - Enabled by [Grunt](http://gruntjs.com/).
 - Exclude directories
 - Exclude files
 - Option to add extra regex 
-- Angular.js support (tested with v1.3)
+- AngularJS support (tested with v1.3)
 - Designed to work with [content-security-policy](https://github.com/samuelerdtman/content-security-policy)
 - url usage "guessing" (add to img-src for img tags etc.)
-- Warnings for: inline script, style and html import usage.
+- Warnings for: inline scripts, styles, html import usage and serverside template usage with express.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -138,10 +138,15 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+### v0.1.4
+- Added warnings for serverside template usage.
+- Empty directives are now set to 'none' by default.
+- Updated tests accordingly.
+
 ### v0.1.3
 - Introduced warnings for: inline script, style and html import usage.
 - Made default-src default to 'none' to be as restrictive as possible.
-- Made connect-src default to 'self' because angular needs it for templates.
+- Made connect-src default to 'self' because AngularJS needs it for templates.
 - Updated tests accordingly.
 - Updated logs accordingly with colored warnings!
 
