@@ -33,7 +33,7 @@ exports.makecsp = {
   },
   default_options: function(test) {
     test.expect(1);
-    var expected = grunt.file.read('test/expected/default_options');
+    var expected = grunt.file.read('test/expected/default_options.json');
 	exec('grunt makecsp:default_options', execOptions, function(error, stdout){
 		var actual = grunt.file.read('csp.json');
 		test.equal(actual, expected, 'Should create a file called csp.json without any urls in it.');

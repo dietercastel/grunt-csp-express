@@ -5,11 +5,16 @@
         "https://ajax.googleapis.com/",
         "https://maxcdn.bootstrapcdn.com/"
     ],
+    "object-src": "'none'",
     "style-src": [
         "'self'",
         "https://ajax.googleapis.com/",
         "https://maxcdn.bootstrapcdn.com/"
     ],
+    "img-src": "'none'",
+    "media-src": "'none'",
+    "frame-src": "'none'",
+    "font-src": "'none'",
     "connect-src": [
         "'self'"
     ]

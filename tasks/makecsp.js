@@ -215,6 +215,8 @@ module.exports = function(grunt) {
 			grunt.verbose.writeln("allURLs (non-uniqued)" + allURLs);
 			if(allURLs.length !== 0){
 				policy[src] = allURLs.filter(onlyUnique);
+			} else{
+				policy[src]	= "'none'";
 			}
 			grunt.verbose.write("Policy so far: " + util.inspect(policy));
 			//Mention line numbers of HTTP resources?
