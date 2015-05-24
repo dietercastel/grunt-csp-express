@@ -33,16 +33,16 @@ exports.makecsp = {
   },
   default_options: function(test) {
     test.expect(1);
-    var expected = grunt.file.read('test/expected/default_options.json');
+    var expected = grunt.file.readJSON('test/expected/default_options.json');
 	exec('grunt makecsp:default_options', execOptions, function(error, stdout){
-		var actual = grunt.file.read('csp.json');
-		test.equal(actual, expected, 'Should create a file called csp.json without any urls in it.');
+		var actual = grunt.file.readJSON('csp.json');
+		test.deepEqual(actual, expected, 'Should create a file called csp.json without any urls in it.');
 		test.done();
 	});
   },
   doubles: function(test){
     test.expect(6);
-    var expected = grunt.file.read('test/expected/doubles.json');
+    var expected = grunt.file.readJSON('test/expected/doubles.json');
 	var expectedNbOfWarnings = 4;
 	var nbOfWarnings = 0;
 	var scriptWarns= 0;
@@ -55,8 +55,8 @@ exports.makecsp = {
 	var styleLN = [20,23,26];
 	var templLN = [2,3,4,5];
 	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
-		var actual = grunt.file.read('tmp/doubles.json');
-		test.equal(actual, expected, 'Should create the correct tmp/doubles.json file without doubles.');
+		var actual = grunt.file.readJSON('tmp/doubles.json');
+		test.deepEqual(actual, expected, 'Should create the correct tmp/doubles.json file without doubles.');
 		stdout.split(/\r?\n/).forEach(function(line){
 			if(line.indexOf("WARNING:") > -1){
 				nbOfWarnings++;			
@@ -92,10 +92,10 @@ exports.makecsp = {
   },
   sae: function(test){
     test.expect(1);
-    var expected = grunt.file.read('test/expected/sae_csp.json');
+    var expected = grunt.file.readJSON('test/expected/sae_csp.json');
 	exec('grunt makecsp:sae', execOptions, function(error, stdout){
-		var actual = grunt.file.read('/vagrant/sae-server/csp.json');
-		test.equal(actual, expected, 'Should create the correct csp.json file in /vagrant/sae-server/csp.json.');
+		var actual = grunt.file.readJSON('/vagrant/sae-server/csp.json');
+		test.deepEqual(actual, expected, 'Should create the correct csp.json file in /vagrant/sae-server/csp.json.');
 		test.done();
 	});
   }
