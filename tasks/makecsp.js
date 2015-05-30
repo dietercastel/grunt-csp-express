@@ -32,34 +32,40 @@ var selfRegex=/( src=| href=){1}("|')((\/)?[^:]+(\/)?)+("|')/i;
 var httpRegex=/http:\/\/[a-z0-9-]+((\.[a-z0-9-]+)*)+(:[0-9]+)?(\/)?/i; 
 var httpsRegex=/https:\/\/[a-z0-9-]+((\.[a-z0-9-]+)*)+(:[0-9]+)?(\/)?/i; 
 
-var inlinescript = {
+var inlinescriptW = {
 	"regex" : "<script>",
 	"message" : "You are using inline script(s) which is bad practice and will break when using CSP." +
 		"\n Extract the inline script(s) into (a) seperate file(s) and include those.",
 	"extraflag" : " -w"
 };
-var inlinestyle = {
+var inlinestyleW = {
 	"regex" : "<style>",
 	"message" : "You are using inline style(s) which is bad practice and will break when using CSP." +
 		"\n Extract the inline style(s) into (a) seperate file(s) and include those.",
 	"extraflag" : " -w"
 };
-var htmlimport = {
+var javascripturlW= {
+	"regex" : "javascript:",
+	"message" : "You are probably using a javascript protocol url which is bad practice and will break when using CSP. Extract the execution of code into a javascript file and include those.",
+	"extraflag" : ""
+};
+var htmlimportW = {
 	"regex" : "<link rel=.import|ng-include",
 	"message" : "You are using html import(s) which could lead to a CSP circumvention in chrome!",
 	"extraflag" : ""
 };
-var templatewarn= {
+var templateW = {
 	"regex" : "app.set\\\(.view engine|app.render\\\(|res.render\\\(",
 	"message" : "Using both AngularJS and a serverside templating engine is discouraged as it can lead to unexpected XSS vulnerabilities!",
 	"extraflag" : ""
 };
 
 var warnings =  [
-	inlinescript,
-	inlinestyle,
-	htmlimport,
-	templatewarn
+	inlinescriptW,
+	inlinestyleW,
+	javascripturlW,
+	htmlimportW,
+	templateW
 ];
 
 function onlyUnique(value, index, self) { 

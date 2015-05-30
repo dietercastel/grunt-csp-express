@@ -8,10 +8,15 @@
 - Exclude directories
 - Exclude files
 - Option to add extra regex 
-- AngularJS support (tested with v1.3)
+- AngularJS support (tested with AngularJS v1.3)
 - Designed to work with [content-security-policy](https://github.com/samuelerdtman/content-security-policy)
 - url usage "guessing" (add to img-src for img tags etc.)
-- Warnings for: inline scripts, styles, html import usage and serverside template usage with express.
+- Warnings for:
+	* inline scripts
+	* inline styles
+	* javascript url usage
+	* html import usage 
+	* Serverside template usage in Express.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -138,6 +143,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+### v0.1.5
+- Added warning for javascript urls
+- Updated tests and README accordingly.
+
 ### v0.1.4
 - Added warnings for serverside template usage.
 - Empty directives are now set to 'none' by default.
@@ -174,6 +183,6 @@ I'm still quite unexperienced with node.js development so I obviously still have
 
 ## Similar Projects
 
-I recently found [contentsecure](https://github.com/Munter/contentsecure) which has a very similar goal.
+I recently found [contentsecure](https://github.com/Munter/contentsecure) which has similar goal but isn't focused on AngularJS and doesn't provide warnings.
 I was not aware of this when creating this initial release.
 I will look further into this and see whether it's beneficial to integrate/merge/improve both projects.
