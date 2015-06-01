@@ -41,21 +41,23 @@ exports.makecsp = {
 	});
   },
   doubles: function(test){
-    test.expect(8);
+    test.expect(9);
     var expected = grunt.file.readJSON('test/expected/doubles.json');
-	var expectedNbOfWarnings = 6;
+	var expectedNbOfWarnings = 7;
 	var nbOfWarnings = 0;
 	var scriptWarns = 0;
 	var styleWarns = 0;
 	var eventWarns = 0;
+	var evalWarns = 0;
 	var jsurlWarn = false;
 	var isupWarn = false;
 	var templateWarn = 0;
 	var doublesPath = "test/fixtures/doubles/doubles.html:";
 	var templPath = "test/fixtures/doubles/javascripts/serversidetemplate.js:";
-	var scriptLN = [11,14,17];
+	var scriptLN = [11,14,17,37];
 	var styleLN = [20,23,26];
 	var eventLN = [30,31,32,33];
+	var evalLN = [38,39];
 	var templLN = [2,3,4,5];
 	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
 		var actual = grunt.file.readJSON('tmp/doubles.json');
@@ -85,6 +87,11 @@ exports.makecsp = {
 					eventWarns++;	
 				}
 			});
+			evalLN.forEach(function(ln){
+				if(line.indexOf(doublesPath+ln) > -1){
+					evalWarns++;	
+				}
+			});
 			templLN.forEach(function(ln){
 				if(line.indexOf(templPath+ln) > -1){
 					templateWarn++;	
@@ -98,6 +105,7 @@ exports.makecsp = {
 		test.equal(scriptWarns, scriptLN.length, 'There should be ' + scriptLN.length +' script warnings for lines: ' + scriptLN);
 		test.equal(styleWarns, styleLN.length, 'There should be ' + styleLN.length +' style warnings for lines: ' + styleLN);
 		test.equal(eventWarns, eventLN.length, 'There should be ' + eventLN.length +' inline event warnings for lines: ' + eventLN);
+		test.equal(evalWarns, evalLN.length, 'There should be ' + evalLN.length +' inline eval warnings for lines: ' + evalLN);
 		test.equal(templateWarn, templLN.length, 'There should be ' + templLN.length +' server-side template engine warnings for lines: ' + templLN);
 
 		test.done();

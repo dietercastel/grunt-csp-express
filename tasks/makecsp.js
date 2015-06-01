@@ -52,7 +52,12 @@ var inlineeventW = {
 };
 var javascripturlW= {
 	"regex" : "javascript:",
-	"message" : "You are probably using a javascript protocol url which is bad practice and will break when using CSP. Extract the execution of code into a javascript file and include those.",
+	"message" : "You are using a javascript protocol url which is bad practice and will break when using CSP. Extract the execution of code into a javascript file and include those.",
+	"extraflag" : ""
+};
+var evalW= {
+	"regex" : "eval\\\(",
+	"message" : "You are using the eval() javascript function which is a bad idea in most cases and will break when using CSP. Try to avoid it and certainly NEVER use it with a user supplied argument.",
 	"extraflag" : ""
 };
 var htmlimportW = {
@@ -70,6 +75,7 @@ var warnings =  [
 	inlinescriptW,
 	inlinestyleW,
 	inlineeventW,
+	evalW,
 	javascripturlW,
 	htmlimportW,
 	templateW

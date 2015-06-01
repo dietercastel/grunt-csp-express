@@ -15,7 +15,8 @@
 	* inline scripts
 	* inline styles
 	* inline event attributes
-	* javascript url usage
+	* javascript: protocol URL usage
+	* JavaScript eval() usage
 	* html import usage 
 	* Serverside template usage in Express.
 
@@ -143,6 +144,10 @@ module.exports = function(grunt) {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+### v0.1.7
+- Added warning for JavaScript eval() usage. 
+- Updated tests and README accordingly.  
 
 ### v0.1.6
 - Added warning for inline event attributes.
