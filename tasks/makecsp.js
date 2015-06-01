@@ -44,6 +44,12 @@ var inlinestyleW = {
 		"\n Extract the inline style(s) into (a) seperate file(s) and include those.",
 	"extraflag" : " -w"
 };
+var inlineeventW = {
+	"regex" : " on.*=",
+	"message" : "You are using inline event attributes which is bad practice and will break when using CSP." +
+		"\n Extract the event attribute(s) into JavaScript file(s) and include those.",
+	"extraflag" : ""
+};
 var javascripturlW= {
 	"regex" : "javascript:",
 	"message" : "You are probably using a javascript protocol url which is bad practice and will break when using CSP. Extract the execution of code into a javascript file and include those.",
@@ -63,6 +69,7 @@ var templateW = {
 var warnings =  [
 	inlinescriptW,
 	inlinestyleW,
+	inlineeventW,
 	javascripturlW,
 	htmlimportW,
 	templateW

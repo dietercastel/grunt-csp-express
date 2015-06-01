@@ -41,12 +41,13 @@ exports.makecsp = {
 	});
   },
   doubles: function(test){
-    test.expect(7);
+    test.expect(8);
     var expected = grunt.file.readJSON('test/expected/doubles.json');
-	var expectedNbOfWarnings = 5;
+	var expectedNbOfWarnings = 6;
 	var nbOfWarnings = 0;
-	var scriptWarns= 0;
-	var styleWarns= 0;
+	var scriptWarns = 0;
+	var styleWarns = 0;
+	var eventWarns = 0;
 	var jsurlWarn = false;
 	var isupWarn = false;
 	var templateWarn = 0;
@@ -54,6 +55,7 @@ exports.makecsp = {
 	var templPath = "test/fixtures/doubles/javascripts/serversidetemplate.js:";
 	var scriptLN = [11,14,17];
 	var styleLN = [20,23,26];
+	var eventLN = [30,31,32,33];
 	var templLN = [2,3,4,5];
 	exec('grunt makecsp:doubles', execOptions, function(error, stdout){
 		var actual = grunt.file.readJSON('tmp/doubles.json');
@@ -78,6 +80,11 @@ exports.makecsp = {
 					styleWarns++;	
 				}
 			});
+			eventLN.forEach(function(ln){
+				if(line.indexOf(doublesPath+ln) > -1){
+					eventWarns++;	
+				}
+			});
 			templLN.forEach(function(ln){
 				if(line.indexOf(templPath+ln) > -1){
 					templateWarn++;	
@@ -90,6 +97,7 @@ exports.makecsp = {
 		test.ok(jsurlWarn, "There should be a warning for javascript url usage.");
 		test.equal(scriptWarns, scriptLN.length, 'There should be ' + scriptLN.length +' script warnings for lines: ' + scriptLN);
 		test.equal(styleWarns, styleLN.length, 'There should be ' + styleLN.length +' style warnings for lines: ' + styleLN);
+		test.equal(eventWarns, eventLN.length, 'There should be ' + eventLN.length +' inline event warnings for lines: ' + eventLN);
 		test.equal(templateWarn, templLN.length, 'There should be ' + templLN.length +' server-side template engine warnings for lines: ' + templLN);
 
 		test.done();

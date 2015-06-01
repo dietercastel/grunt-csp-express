@@ -14,6 +14,7 @@
 - Warnings for:
 	* inline scripts
 	* inline styles
+	* inline event attributes
 	* javascript url usage
 	* html import usage 
 	* Serverside template usage in Express.
@@ -143,8 +144,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+### v0.1.6
+- Added warning for inline event attributes.
+- Updated tests and README accordingly.  
+
 ### v0.1.5
-- Added warning for javascript urls
+- Added warning for javascript urls.
 - Updated tests and README accordingly.
 
 ### v0.1.4
@@ -161,7 +166,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v0.1.2
 - Code and log cleanup.
-- Support for --verbose run with Grunt
+- Support for --verbose run with Grunt.
 - option.expressDir now has default value '.'
 - Introduced 3 tests 
 - Updated documentation accordingly. 
